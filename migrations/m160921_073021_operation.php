@@ -1,5 +1,4 @@
 <?php
-namespace docflow\migrations;
 
 use yii\db\Migration;
 

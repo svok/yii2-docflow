@@ -14,7 +14,7 @@ abstract class DocFlowBase extends MultipleActiveRecord
      *
      * @return array ['tag' => 'document_tag', 'name' => 'Document Name', 'description' => 'Document Description']
      */
-    abstract public function getDoc();
+    abstract public static function getDoc();
 
     /**
      * This method returns the the [[docflow\statuses\Statuses]] object containing the list of all  available statuses 
@@ -22,12 +22,12 @@ abstract class DocFlowBase extends MultipleActiveRecord
      *
      * @return docflow\statuses\Statuses Object with the list of statuses
      */
-    abstract public function getStatuses();
+    abstract public static function getStatuses();
 
     /**
      * Return current status of the document
      *
      * @return docflow\statuses\Status Status object
      */
-    abstract public function getStatus()
+    abstract public function getStatus();
 }
