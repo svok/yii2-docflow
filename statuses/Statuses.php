@@ -4,7 +4,9 @@
 
 namespace docflow\statuses;
 
-use yii\base\Model
+use yii\base\Model;
+use yii\helpers\ArrayHelper;
+
 use docflow\Docflow;
 
 abstract class Statuses extends Model
