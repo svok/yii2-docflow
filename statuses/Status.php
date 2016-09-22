@@ -4,7 +4,7 @@
 
 namespace docflow\statuses;
 
-use yii\base\Model
+use yii\base\Model;
 use docflow\Docflow;
 
 class Status extends Model

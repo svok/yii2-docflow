@@ -38,7 +38,7 @@ abstract class Statuses extends Model
      */
     public function findById($id)
     {
-        return ArrayHelpers::index($this->all(), 'id')[$id];
+        return ArrayHelper::index($this->all(), 'id')[$id];
     }
 
     /**
@@ -46,9 +46,9 @@ abstract class Statuses extends Model
      *
      * @return docflow\statuses\Status Statuses object
      */
-    public function findByTag($tag);
+    public function findByTag($tag)
     {
-        return ArrayHelpers::index($this->all(), 'tag')[$tag];
+        return ArrayHelper::index($this->all(), 'tag')[$tag];
     }
 
 }
