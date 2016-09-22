@@ -30,4 +30,11 @@ abstract class DocFlowBase extends MultipleActiveRecord
      * @return docflow\statuses\Status Status object
      */
     abstract public function getStatus();
+
+    /**
+     * Set current status of the document
+     *
+     * @param docflow\statuses\Status||string||integer Status object, tag or id
+     */
+    abstract public function setStatus($status);
 }
