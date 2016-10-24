@@ -192,7 +192,7 @@ class Log extends Behavior
                 // Значения - это имена атрибутов
                 $aName = $val;
                 $aValue = $this->owner->getAttribute($aName);
-            } elseif ($val instanceof \Closure) {
+            } elseif (is_callable($val)) {
                 // Ключ - имя атрибута, значение - вычисляемое
                 $aName = $key;
                 $aValue = call_user_func($val, $this->owner);
