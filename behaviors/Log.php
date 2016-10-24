@@ -171,7 +171,8 @@ class Log extends Behavior
      */
     public function logInit($event)
     {
-        $this->setNewVersion();
+        if(!empty($this->versionField))
+            $this->setNewVersion();
     }
 
     /**
@@ -214,6 +215,7 @@ class Log extends Behavior
                 $this->_to_save_attributes[$aName] = $aValue;
             }
 
+/*
             if ($this->owner->hasHiddenAttribute($aName)) {
                 $ahValue = $this->owner->getHiddenAttribute($aName);
 
@@ -231,6 +233,7 @@ class Log extends Behavior
                     $this->_to_save_attributes[$aName] = $ahValue;
                 }
             }
+*/
         }
 
         if ($this->_to_save_log) {
@@ -250,8 +253,8 @@ class Log extends Behavior
                 }
             }
             $this->setNewVersion();
+            $this->_to_save_attributes[$this->versionField] = $this->owner->{$this->versionField};
         }
-        $this->_to_save_attributes[$this->versionField] = $this->owner->{$this->versionField};
 
         return true;
     }
@@ -275,6 +278,7 @@ class Log extends Behavior
             return;
         }
 
+//        die("owner->id:".$this->owner->id);
         $this->_to_save_attributes[$this->docId] = $this->owner->id;
         unset($this->_to_save_attributes['id']);
         $this->_to_save_attributes[$this->changedAttributesField] = '{' . implode(',',

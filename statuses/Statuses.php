@@ -38,7 +38,8 @@ abstract class Statuses extends Model
      */
     public function findById($id)
     {
-        return ArrayHelper::index($this->all(), 'id')[$id];
+//        echo "<pre>";var_dump(ArrayHelper::index($this->all(), 'id'),$id);die();
+        return @ArrayHelper::index($this->all(), 'id')[$id];
     }
 
     /**
