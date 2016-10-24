@@ -238,7 +238,9 @@ class Log extends Behavior
 
         if ($this->_to_save_log) {
             $time = static::returnTimeStamp();
-            $this->owner->{$this->timeField} = $time;
+            if($this->owner->hasAttribute($this->timeField)) {
+                $this->owner->{$this->timeField} = $time;
+            }
             $this->_to_save_attributes[$this->timeField] = $time;
         } else {
             return true;
