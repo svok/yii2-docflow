@@ -150,7 +150,32 @@ class Log extends Behavior
 
         return $this->owner
             ->hasMany($this->logClass, ['doc_id' => 'id'])
+            ->inverseOf('doc')
             ->andFilterWhere(['&&', $this->changedAttributesField, $array]);
+    }
+
+    /**
+     * Saves a record to the log table.
+     *
+     * @param null $attributes
+     *
+     * @return ActiveQueryInterface
+     *
+     * @internal param AfterSaveEvent $event
+     */
+    public function getLastLog()
+    {
+        $logClass = $this->logClass;
+        $query = $logClass::find()->from([
+            'lastLogs' => '(select distinct on ('.$this->docId.') * from '.$logClass::tableName().' ORDER BY '.$this->docId.', id DESC)'
+        ]);
+        $query->primaryModel = $this->owner;
+        $query->link = [$this->docId => 'id'];
+        $query->multiple = false;
+        return $query;
+
+//        return $this->owner
+//            ->hasOne($this->logClass, ['doc_id' => 'id'])
     }
 
     /**
@@ -292,7 +317,7 @@ class Log extends Behavior
         $log->setAttributes(array_intersect_key($this->_to_save_attributes, $log->getAttributes()));
 
         if (!$log->save()) {
-            throw new ErrorException(print_r($log->errors, true));
+            throw new ErrorException(__METHOD__."\n".print_r($log->errors, true));
         }
     }
 
