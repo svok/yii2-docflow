@@ -305,7 +305,6 @@ class Log extends Behavior
             return;
         }
 
-//        die("owner->id:".$this->owner->id);
         $this->_to_save_attributes[$this->docId] = $this->owner->id;
         unset($this->_to_save_attributes['id']);
         $this->_to_save_attributes[$this->changedAttributesField] = '{' . implode(',',
@@ -313,8 +312,9 @@ class Log extends Behavior
 
         $logClass = $this->logClass;
         /** @var ActiveRecord $log */
-        $log = new $logClass();
-        $log->setAttributes(array_intersect_key($this->_to_save_attributes, $log->getAttributes()));
+        $log = new $logClass($this->_to_save_attributes);
+//        echo "<pre>";var_dump($log);
+//        die();
 
         if (!$log->save()) {
             throw new ErrorException(__METHOD__."\n".print_r($log->errors, true));

@@ -129,6 +129,7 @@ class MultipleActiveRecord extends ModuleRecord
 
         /* Если массив моделей пуст, то выходим из метода */
         if (count(static::getSaveMultiple()) === 0) {
+            Yii::trace('empty save multiple list', __METHOD__);
             return true;
         }
 
