@@ -100,7 +100,8 @@ class MultipleActiveRecord extends ModuleRecord
      */
     public static function getSaveMultiple()
     {
-        return static::$_models[static::className()];
+        return is_array(static::$_models) && array_key_exists(static::className(), static::$_models) ?
+             static::$_models[static::className()] : [];
     }
 
     /**
