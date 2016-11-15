@@ -25,8 +25,7 @@ use yii\helpers\ArrayHelper;
 class LogMultiple extends Log
 {
     /**
-     * @var array Список классов которые подписали на события MultipleActiveRecord::EVENT_TO_SAVE_MULTIPLE,
-     *    MultipleActiveRecord::EVENT_SAVED_MULTIPLE
+     * @var array Список классов которые подписали на события VekActiveRecord::EVENT_TO_SAVE_MULTIPLE, VekActiveRecord::EVENT_SAVED_MULTIPLE
      */
     protected static $_attachedClasses = [];
 
@@ -57,9 +56,9 @@ class LogMultiple extends Log
     public function attach($owner)
     {
         if (!in_array($owner->className(), self::$_attachedClasses)) {
-            Event::on($owner->className(), MultipleActiveRecord::EVENT_TO_SAVE_MULTIPLE,
+            Event::on($owner->className(), UnstructuredRecord::EVENT_TO_SAVE_MULTIPLE,
                 [self::className(), 'logToSaveMultiple']);
-            Event::on($owner->className(), MultipleActiveRecord::EVENT_SAVED_MULTIPLE,
+            Event::on($owner->className(), UnstructuredRecord::EVENT_SAVED_MULTIPLE,
                 [self::className(), 'logSavedMultiple']);
             self::$_attachedClasses[] = $owner->className();
         }

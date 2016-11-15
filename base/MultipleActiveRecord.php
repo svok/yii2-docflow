@@ -241,7 +241,7 @@ class MultipleActiveRecord extends ModuleRecord
                 $where_pk[] = '[[t.' . $pk . ']] = [[v.' . $pk . ']]';
             }
 
-            $sql = 'UPDATE {{%' . static::tableName() . '}} as t '
+            $sql = 'UPDATE ' . static::tableName() . ' as t '
                 . 'SET ' . implode(', ', $attr_set) . ' '
                 . 'FROM (VALUES ' . implode(', ', $updates) . ') as v([[' . implode(']], [[', $attributes) . ']]) '
                 . 'WHERE ' . implode(' AND ', $where_pk);
