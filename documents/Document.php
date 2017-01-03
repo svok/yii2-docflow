@@ -27,4 +27,30 @@ abstract class Document extends DocFlowBase
      * @return yii\db\ActiveQuery
      */
     abstract public function getCurrentOperations();
+
+    /**
+     * Set status for the document
+     */
+    public function setStatus($status)
+    {
+        if($status instanceOf Status) {
+            $s = $status;
+        } elseif(is_string($status)) {
+            $s = static::getStatuses()->findByTag($status);
+        } elseif(is_int($status)) {
+            $s = static::getStatuses()->findById($status);
+        }
+        $this->status_id = $s->id;
+    }
+
+    /**
+     * Set status for the document
+     *
+     * @return docflow\statuses\Status
+     */
+    public function getStatus()
+    {
+        return $this->getStatuses()->findById($this->status_id);
+    }
+
 }
